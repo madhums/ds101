@@ -1,0 +1,48 @@
+version: '3.2'
+
+services:
+  jupyter:
+    container_name: jupyter
+    build:
+      context: .
+      dockerfile: ./jupyter/Dockerfile
+    volumes:
+      - ./jupyter:/notebooks
+    ports:
+      - 8888:8888
+    env_file: 
+      - ./config/jupyter.env
+
+  minio:
+    container_name: minio
+    image: minio/minio
+    ports:
+      - 9000:9000
+    command: server /data
+    env_file: 
+      - ./config/minio.env
+    volumes: 
+      - ./data:/data
+
+  postgres:
+    container_name: postgres
+    image: postgres
+    ports:
+      - 5432:5432
+    env_file: 
+      - ./config/postgres.env
+    volumes: 
+      - ./db_data:/var/lib/postgresql/data
+  
+  # metabase:
+  #   image: metabase/metabase
+  #   depends_on:
+  #     - db
+  #   ports:
+  #     - 5000:3000
+  #   networks:
+  #     - webnet
+  #   volumes:
+  #     - ./metabase_data:/metabase-data
+  #   environment:
+  #     MB_DB_FILE: /metabase-data/metabase.db

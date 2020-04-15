@@ -1,0 +1,7 @@
+tutorials
+.vscode
+.ipynb_checkpoints
+db_data
+metabase_data
+data
+*.env
