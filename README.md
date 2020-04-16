@@ -8,6 +8,7 @@ A small boilerplate/project with docker for data science.
 cp jupyter.env.example jupyter.env
 cp minio.env.example minio.env
 cp postgres.env.example postgres.env
+cp database.env.example database.env
 ```
 
 Provide appropriate values in the .env files and then run
@@ -33,14 +34,18 @@ Otherwise you can simply stick to `docker-compose start` and `stop`.
 - `postgres`: Database store
 - `metabase`: Cool data science stuff
 - `superset`: Another cool visualisations service
+- `airflow`: Scheduler and task runner
 
 **Structure:**
 
 - `config`: Contains environment variables, keys, secrets etc
+- `jupyter`: Contains notebooks
+- `dags`: Task runners
+
+Data folders:
 - `data`: Contains data which is mounted on to minio
 - `db_data`: Postgres database persistant volumne
 - `metabase_data`: Metabase data persistant volume
-- `jupyter`: Contains notebooks
 
 ---
 
