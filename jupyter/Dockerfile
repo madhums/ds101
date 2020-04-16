@@ -14,7 +14,7 @@ RUN apt-get update
 RUN apt-get install libpq-dev -y
 USER $NB_USER
 
-FROM build
+FROM build as build-jupyter
 
 # copy work files
 COPY ./jupyter .
@@ -28,7 +28,13 @@ RUN jupyter nbextension enable --py hide_code && \
   jupyter nbextension enable toc2/main && \
   jupyter nbextension enable code_prettify/autopep8 && \
   jupyter nbextension enable spellchecker/main && \
-  jupyter nbextension enable ruler/main
+  jupyter nbextension enable ruler/main && \
+  jupyter labextension install @jupyterlab/toc && \
+  jupyter labextension install @ryantam626/jupyterlab_code_formatter && \
+  jupyter serverextension enable --py jupyterlab_code_formatter && \
+  jupyter labextension install jupyterlab-execute-time
+
+FROM build-jupyter
 
 # expose port
 EXPOSE 8888
