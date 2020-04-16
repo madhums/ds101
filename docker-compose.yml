@@ -12,7 +12,7 @@ services:
       - jupyter_settings:/home/jovyan/.jupyter
     ports:
       - 8888:8888
-    env_file: 
+    env_file:
       - ./config/jupyter.env
       - ./config/minio.env
 
@@ -20,23 +20,23 @@ services:
     container_name: minio
     image: minio/minio
     command: server /data
-    volumes: 
+    volumes:
       - ./data:/data
     ports:
       - 9000:9000
-    env_file: 
+    env_file:
       - ./config/minio.env
 
   postgres:
     container_name: postgres
     image: postgres
-    volumes: 
+    volumes:
       - ./db_data:/var/lib/postgresql/data
     ports:
       - 5432:5432
-    env_file: 
+    env_file:
       - ./config/postgres.env
-  
+
   # metabase:
   #   image: metabase/metabase
   #   depends_on:
@@ -50,5 +50,5 @@ services:
   #   environment:
   #     MB_DB_FILE: /metabase-data/metabase.db
 
-volumes: 
+volumes:
   jupyter_settings:
