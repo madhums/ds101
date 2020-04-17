@@ -47,6 +47,11 @@ Data folders:
 - `db_data`: Postgres database persistant volumne
 - `metabase_data`: Metabase data persistant volume
 
+## Code style
+
+- Use yapf with facebook style
+- Pylint for linting
+
 ---
 
 Inspired by [data-science-stack](https://github.com/jgoerner/data-science-stack-cookiecutter)

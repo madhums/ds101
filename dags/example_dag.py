@@ -4,15 +4,13 @@ import logging
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 
-### TASK ###
 
-
+# task
 def log_hello_world():
-    # fetching the data
     logging.info('Hello wonderful world!')
 
 
-### DAG ###
+# dag
 default_args = {
     'owner': 'airflow',
     'depends_on_past': 'false',
