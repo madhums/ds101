@@ -9,6 +9,8 @@ services:
     command: jupyter lab
     volumes:
       - ./jupyter:/notebooks
+      - ./jupyter/jupyter_notebook_config.py:/home/jovyan/.jupyter/jupyter_notebook_config.py
+      - ./jupyter/templates:/home/jovyan/.jupyter/templates
       - jupyter_settings:/home/jovyan/.jupyter
     ports:
       - 8888:8888

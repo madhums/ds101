@@ -62,6 +62,7 @@ jupyterhub==1.1.0
 jupyterlab==2.0.1
 jupyterlab-code-formatter==1.2.3
 jupyterlab-server==1.0.7
+jupyterlab-templates==0.2.3
 kiwisolver==1.1.0
 llvmlite==0.31.0
 locket==0.2.0
@@ -86,6 +87,7 @@ olefile==0.46
 packaging==20.1
 pamela==1.0.0
 pandas==1.0.2
+pandas-datareader==0.8.1
 pandocfilters==1.4.2
 parsel==1.5.2
 parso==0.6.2
