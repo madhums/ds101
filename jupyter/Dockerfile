@@ -69,7 +69,7 @@ RUN apt-get install -y g++ \
 
 ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
 ENV C_INCLUDE_PATH=/usr/include/gdal
-RUN pip install GDAL==$(gdal-config --version)
+RUN pip install GDAL==$(gdal-config --version) netCDF4 rasterio h5py
 
 # Get ODC and install it
 ENV APPDIR=/tmp/code
@@ -77,8 +77,8 @@ RUN mkdir -p $APPDIR
 WORKDIR $APPDIR
 RUN git config --global url."http://".insteadOf https://
 RUN git clone https://github.com/opendatacube/datacube-core.git .
-RUN pip install netCDF4 rasterio h5py
-RUN pip install -e .
+RUN git checkout develop
+RUN python setup.py install
 
 # Set the locale, this is required for some of the Python packages
 ENV LC_ALL C.UTF-8
