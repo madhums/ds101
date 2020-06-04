@@ -1,9 +1,10 @@
+*.env
 tutorials
 .vscode
 db_data
 metabase_data
 data
-*.env
+jupyter_settings
 
 # --------------------
 # Python.gitignore
