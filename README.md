@@ -5,10 +5,10 @@ A small boilerplate/project with docker for data science.
 ### Getting started
 
 ```sh
-cp jupyter.env.example jupyter.env
-cp minio.env.example minio.env
-cp postgres.env.example postgres.env
-cp database.env.example database.env
+cp config/jupyter.env.example jupyter.env
+cp config/minio.env.example minio.env
+cp config/postgres.env.example postgres.env
+cp config/database.env.example database.env
 ```
 
 Provide appropriate values in the .env files and then run
