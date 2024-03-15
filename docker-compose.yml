@@ -15,8 +15,8 @@ services:
     ports:
       - 8888:8888
     env_file:
-      - ./config/jupyter.env
-      - ./config/minio.env
+      - ./.env.jupyter
+      - ./.env.minio
     depends_on:
       - postgres
 
@@ -29,7 +29,7 @@ services:
     ports:
       - 9000:9000
     env_file:
-      - ./config/minio.env
+      - ./.env.minio
 
   postgres:
     container_name: postgres
@@ -39,7 +39,7 @@ services:
     ports:
       - 5432:5432
     env_file:
-      - ./config/postgres.env
+      - ./.env.postgres
 
   airflow:
     container_name: airflow
@@ -50,9 +50,9 @@ services:
     ports:
       - 8080:8080
     env_file:
-      - ./config/postgres.env
-      - ./config/minio.env
-      - ./config/database.env
+      - ./.env.postgres
+      - ./.env.minio
+      - ./.env.database
     environment:
       - EXECUTOR=Local
     depends_on:
