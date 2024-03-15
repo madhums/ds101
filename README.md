@@ -8,6 +8,7 @@ A small boilerplate/project with docker for data science.
 cp config/.env.jupyter.example .env.jupyter
 cp config/.env.minio.example .env.minio
 cp config/.env.postgres.example .env.postgres
+cp config/.env.airflow.example .env.airflow
 cp config/.env.database.example .env.database
 ```
 
@@ -29,12 +30,12 @@ Otherwise you can simply stick to `docker-compose start` and `stop`.
 
 **Services:**
 
-- `jupyter`: Jupyter notebooks and jupyter lab where you can do fancy stuff
-- `minio`: A key value file store like aws
+- `jupyterlab`: Jupyter notebooks and jupyter lab where you can do fancy stuff ([localhost:8888](http://localhost:8888))
+- `minio`: A key value file store like aws ([localhost:9001](http://localhost:9001))
 - `postgres`: Database store
 - `metabase`: Cool data science stuff
 - `superset`: Another cool visualisations service
-- `airflow`: Scheduler and task runner
+- `airflow`: Scheduler and task runner ([localhost:8080](http://localhost:8080))
 
 **Structure:**
 
@@ -46,11 +47,6 @@ Data folders:
 - `data`: Contains data which is mounted on to minio
 - `db_data`: Postgres database persistant volumne
 - `metabase_data`: Metabase data persistant volume
-
-## Code style
-
-- Use yapf with facebook style
-- Pylint for linting
 
 ---
 
