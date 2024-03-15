@@ -1,5 +1,15 @@
 version: '3.2'
 
+x-airflow-common:
+  &airflow-common
+  image: apache/airflow
+  volumes:
+    - ./dags:/opt/airflow/dags
+  env_file:
+    - ./.env.airflow
+  depends_on:
+    - postgres
+
 services:
   jupyter:
     container_name: jupyter
@@ -23,11 +33,12 @@ services:
   minio:
     container_name: minio
     image: minio/minio
-    command: server /data
+    command: server /data --console-address ":9001"
     volumes:
       - ./data:/data
     ports:
       - 9000:9000
+      - 9001:9001
     env_file:
       - ./.env.minio
 
@@ -37,26 +48,35 @@ services:
     volumes:
       - ./db_data:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - 54321:5432
     env_file:
       - ./.env.postgres
 
-  airflow:
-    container_name: airflow
-    image: puckel/docker-airflow
+  airflow-webserver:
+    <<: *airflow-common
+    container_name: airflow_webserver
     command: webserver
-    volumes:
-      - ./dags:/usr/local/airflow/dags
     ports:
       - 8080:8080
-    env_file:
-      - ./.env.postgres
-      - ./.env.minio
-      - ./.env.database
-    environment:
-      - EXECUTOR=Local
-    depends_on:
-        - postgres
+
+  airflow-scheduler:
+    <<: *airflow-common
+    container_name: airflow_scheduler
+    command: scheduler
+
+  # airflow-worker:
+  #   <<: *airflow-common
+  #   container_name: airflow_worker
+  #   entrypoint: /bin/bash
+  #   command: celery worker
+
+  # airflow-flower:
+  #   <<: *airflow-common
+  #   container_name: airflow_flower
+  #   entrypoint: /bin/bash
+  #   command: celery flower
+  #   ports:
+  #     - 5555:5555
 
   # metabase:
   #   image: metabase/metabase
